@@ -55,40 +55,67 @@
   <script type="text/javascrip" src="/socket.io/socket.io.js"></script>
   <script type="text/javascrip" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script type="text/javascrip">
-    var chat, username, peolple, ispeak;
+    var chat, username, people, ispeak;
+    var socket;
     
+    
+    // What to do when a message arrive from someone else ?
     // from = {id:'', name:''}
     // msg = 'txt'
     function onChatMessage(from, msg) {
       
     }
     
+    // What to do when another user connect to the chat
     // user = {id:'', name:''}
     function onUserConnect(user) {
       
     }
     
+    // What to do when a user disconnect from the chat
     // user = {id:'', name:''}
     function onUserDisconnect(user) {
       
     }
     
+    // 
     // srv = {ip:''}
     function onServerUpdate(srv) {
       
     }
     
+    
+    // call to send a message
+    function sendMessage(msg) {
+      socket.emit('sendMessage', {msg:msg});
+    }
+    
+    // call to set username
+    function setUsername(username) {
+      socket.emit('setUsername', {name: username});
+    }
+    
+    
     $(function() {
       chat = $('#chat');
       username = $('#username');
-      var socket = io.connect();
+      people = $('#people');
+      ispeak = $('#ispeak');
+      
+      socket = io.connect();
+      socket.on('bcMsg', function(data) {
+        onChatMessage(data.from, data.msg);
+      });
+      socket.on('onUserConnect', function(data) {
+        onUserConnect(data.user);
+      });
     });
   </script>
 </head>
 <body>
   <div id="info">
     <h1>Opencode's chat !</h1>
-    <label>Nickname : <input type="text" id="username" /></label>
+    <label>Nickname : <input type="text" id="username" value="noname" /></label>
   </div>
   <div id="chat">
     
