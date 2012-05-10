@@ -1,0 +1,22 @@
+{
+  "name": "opencode-ec2",
+  "version": "0.1.0",
+  "author": "JeanSebTr <jeansebtr@xpensia.com>",
+  "description": "Demo of a scalable app",
+  "contributors": [],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/JeanSebTr/opencode-ec2.git"
+  },
+  "dependencies" : {
+    "socket.io": "latest"
+  },
+  "devDependencies": {
+  },
+  "bundleDependencies": [
+  ],
+  "license": "MIT",
+  "engine": {
+    "node": ">=0.6"
+  }
+}
