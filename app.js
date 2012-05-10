@@ -46,19 +46,24 @@ io.on('connection', function(socket) {
   var id = crypto.randomBytes(20).toString('hex');
   var user = {id: id, name: 'noname'};
   socket.set('user', user);
+  socket.broadcast.emit('onUserConnect', {user: user});
   socket.on('sendMessage', function(data) {
+    console.log('sendMessage :', data);
     socket.get('user', function(err, user) {
       socket.broadcast.emit('bcMsg', {from: user, msg: data.msg});
     });
   });
   socket.on('setUsername', function(data) {
+    console.log('setUsername :', data);
     socket.get('user', function(err, user) {
       user.name = data.name;
       socket.broadcast.emit('onUserConnect', {user: user});
       socket.set('user', user);
     });
   });
-  
+  socket.on('disconnect', function(data) {
+    socket.broadcast.emit('onUserDisconnect', {user: data.user});
+  });
 });
 
 

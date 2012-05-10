@@ -109,6 +109,16 @@
       socket.on('onUserConnect', function(data) {
         onUserConnect(data.user);
       });
+      username.keypress(function(event) {
+        if(event.keyCode != 13) return;
+        setUsername(username.val());
+      });
+      ispeak.keypress(function(event) {
+        console.log(event.keyCode);
+        if(event.keyCode != 13) return;
+        sendMessage(ispeak.val());
+      });
+      console.log('Dom ready !?');
     });
   </script>
 </head>
