@@ -69,19 +69,25 @@
     // What to do when another user connect to the chat
     // user = {id:'', name:''}
     function onUserConnect(user) {
-      
+      var uDom = $('#user-'+user.id);
+      if(uDom.length) {
+        // TODO : refresh username
+      }
+      else {
+        // TODO : add user to list with id='user-'+user.id
+      }
     }
     
     // What to do when a user disconnect from the chat
     // user = {id:'', name:''}
     function onUserDisconnect(user) {
-      
+      // TODO : remove user from list
     }
     
     // 
     // srv = {ip:''}
     function onServerUpdate(srv) {
-      
+      // TODO : bah, forget that
     }
     
     
@@ -115,7 +121,6 @@
         setUsername(username.val());
       });
       ispeak.keypress(function(event) {
-        console.log(event.keyCode);
         if(event.keyCode != 13) return;
         sendMessage(ispeak.val());
       });
